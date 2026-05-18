@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Timothy Redaelli <timothy@fsfe.org>
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
+[package]
+name = "btrfs-lsattr"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.74"
+description = "Drop-in lsattr replacement with a btrfs-aware tree-search fast path for --has filters"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/drizzt/btrfs-lsattr"
+homepage = "https://github.com/drizzt/btrfs-lsattr"
+readme = "README.md"
+keywords = ["btrfs", "lsattr", "chattr", "filesystem", "ioctl"]
+categories = ["command-line-utilities", "filesystem"]
+
+[[bin]]
+name = "btrfs-lsattr"
+path = "src/main.rs"
+
+[dependencies]
+libc = "0.2"
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
